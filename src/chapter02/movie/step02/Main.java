@@ -1,13 +1,20 @@
-package chapter02.movie.step01;
+package chapter02.movie.step02;
 
 import chapter02.money.Money;
-import chapter02.movie.step01.pricing.*;
+import chapter02.movie.step01.Customer;
+import chapter02.movie.step01.Movie;
+import chapter02.movie.step01.Reservation;
+import chapter02.movie.step01.Screening;
+import chapter02.movie.step01.pricing.AmountDiscountPolicy;
+import chapter02.movie.step01.pricing.NoneDiscountPolicy;
+import chapter02.movie.step01.pricing.PercentDiscountPolicy;
+import chapter02.movie.step01.pricing.PeriodCondition;
+import chapter02.movie.step01.pricing.SequenceCondition;
 
 import java.time.DayOfWeek;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
@@ -16,7 +23,7 @@ public class Main {
         Customer customer = new Customer();
         //1회차에 2000원 할인
         Movie aloneHomeMovie = new Movie("나홀로집에", Duration.ofMinutes(120), Money.wons(12000L),
-                new AmountDiscountPolicy(Money.wons(2000L), new SequenceCondition(1)));
+                new AmountDiscountPolicy(Money.wons(2000L), new chapter02.movie.step01.pricing.SequenceCondition(1)));
 
         //나홀로집에 1회차 상영정보
         Screening aloneHomeScreening_1 = new Screening(aloneHomeMovie, 1, LocalDateTime.now());
@@ -32,7 +39,7 @@ public class Main {
                 Duration.ofMinutes(120),
                 Money.wons(12000),
                 new PercentDiscountPolicy(0.1,
-                        new PeriodCondition(DayOfWeek.MONDAY,LocalTime.of(10,0),LocalTime.of(0,0)),
+                        new chapter02.movie.step01.pricing.PeriodCondition(DayOfWeek.MONDAY,LocalTime.of(10,0),LocalTime.of(0,0)),
                         new SequenceCondition(2),
                         new PeriodCondition(DayOfWeek.MONDAY,LocalTime.of(23,0),LocalTime.of(23,59))));
 
